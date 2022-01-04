@@ -39,6 +39,7 @@ client.on('error', function (error) {
 client.subscribe('get/status/all')
 client.subscribe('status/water/set')
 client.subscribe('status/timer/set')
+client.subscribe('status/light/set')
 
 
 // publish message 'Hello' to topic 'my/test/topic'
@@ -66,11 +67,16 @@ io.on('connect', (socket) => {
   socket.on('set-timer', (status) => {
     client.publish('status/timer/set', status)
   })
+  socket.on('set-light', (status) => {
+    console.log("Set-Light called: ",status)
+    client.publish('status/light/set', status)
+  })
   
-
   socket.on('disconnect', () => {
     socket.emit('message', 'Disconnected')
   })
 })
 const PORT = process.env.PORT || 5000
-server.listen(PORT, () => console.log(`Server has started at port ${PORT}`))
+server.listen(PORT, '0.0.0.0', function() {
+  console.log('Listening to port:  ' + PORT);
+});
