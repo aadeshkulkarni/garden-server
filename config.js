@@ -3,6 +3,6 @@ const options={
     port: 8883,
     protocol: 'mqtts',
     username: 'aadesh.kulkarni',
-    password: 'K@izen080394'
+    password: '----'
 }
 module.exports=options;
